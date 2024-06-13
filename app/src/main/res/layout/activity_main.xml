@@ -29,14 +29,14 @@
                 android:textColor="#ffffff"/>
         </LinearLayout>
     </LinearLayout>
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:src=""-->
-<!--        android:backgroundTint="#444444"-->
-<!--        android:id="@+id/addButton"-->
-<!--        android:contentDescription="Record Baru"/>-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@android:drawable/ic_input_add"
+        android:backgroundTint="#444444"
+        android:id="@+id/addButton"
+        android:contentDescription="Record Baru"/>
 </FrameLayout>

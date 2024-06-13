@@ -66,16 +66,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    private void initAddButton() {
-//        _addButton = findViewById(R.id.addButton);
-//
-//        _addButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), AddM)
-//            }
-//        });
-//    }
+    private void initAddButton() {
+        _addButton = findViewById(R.id.addButton);
+
+        _addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddMahasiswaActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
 
 }

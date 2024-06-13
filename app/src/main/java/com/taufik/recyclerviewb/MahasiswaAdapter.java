@@ -1,5 +1,6 @@
 package com.taufik.recyclerviewb;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,14 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaViewHolder> 
         String jp = mm.getJP();
         jp = jp.substring(0,2);
         holder._jpTextView.setText(jp);
+
+        if (jp.equals("TI")){
+            holder._jpTextView.setBackgroundColor(Color.BLUE);
+        } else if (jp.equals("SI")) {
+            holder._jpTextView.setBackgroundColor(Color.RED);
+        }else {
+            holder._jpTextView.setBackgroundColor(Color.GRAY);
+        }
     }
 
     @Override
