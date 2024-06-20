@@ -31,8 +31,20 @@ public class AddMahasiswaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mahasiswa);
 
-//        initInputs();
+        initInputs();
         initSaveButtons();
+    }
+
+    private void initInputs() {
+        _alamatEditText = findViewById(R.id.alamatEditText);
+        _namaEditText = findViewById(R.id.namaEditText);
+        _nimEditText = findViewById(R.id.nimEditText);
+        _tahunMasukEditText = findViewById(R.id.tahunMasukEditText);
+        _tanggalLahirEditText = findViewById(R.id.tanggalLahirEditText);
+        _tempatLahirEditText = findViewById(R.id.tempatLahirEditText);
+        _jenisKelaminSpinner = findViewById(R.id.jenisKelaminSpinner);
+        _jpSpinner = findViewById(R.id.jpSpinner);
+        _statusNikahSpinner = findViewById(R.id.statusNikahSpinner);
     }
 
     private void initSaveButtons() {
@@ -112,5 +124,4 @@ public class AddMahasiswaActivity extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -15,6 +15,12 @@
         android:theme="@style/Theme.RecyclerViewB"
         tools:targetApi="31">
         <activity
+            android:name=".search"
+            android:exported="false" />
+        <activity
+            android:name=".Search_nama"
+            android:exported="false" />
+        <activity
             android:name=".AddMahasiswaActivity"
             android:exported="false" />
         <activity

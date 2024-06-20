@@ -1,12 +1,24 @@
 package com.taufik.recyclerviewb;
 
+import static java.util.Locale.filter;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,16 +28,18 @@ import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton _addButton;
+    private FloatingActionButton _addButton,_refreshButton;
     private RecyclerView _recyclerView1;
-
-    private TextView _txtMahasiswaCount;
+    private MahasiswaAdapter ma;
+    private List<MahasiswaModel> mahasiswaModelList;
+    private TextView _txtMahasiswaCount,_txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +51,45 @@ public class MainActivity extends AppCompatActivity {
 
         initAddButton();
         loadRecyclerView();
+        initRefreshButton();
+        initSearch();
     }
+
+
+
+    private void initSearch() {
+        _txtSearch = findViewById(R.id.txtSearch);
+
+        _txtSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String filterText = _txtSearch.getText().toString();
+                if (!filterText.isEmpty()){
+                    filter(filterText);
+                }
+                else
+                    loadRecyclerView();
+                return false;
+            }
+        });
+    }
+
+    private void filter(String text) {
+        List<MahasiswaModel> filteredList = new ArrayList<>();
+
+        for (MahasiswaModel item: mahasiswaModelList){
+            if (item.getNama().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+
+            if (filteredList.isEmpty()){
+                Toast.makeText(MainActivity.this,"No Data Found...", Toast.LENGTH_SHORT).show();
+            } else {
+                ma.filter(filteredList);
+            }
+        }
+    }
+
 
     private void loadRecyclerView() {
         AsyncHttpClient ahc = new AsyncHttpClient();
@@ -47,12 +99,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Gson g = new Gson();
-                List<MahasiswaModel> mahasiswaModelList = g.fromJson(new String(responseBody),new TypeToken<List<MahasiswaModel>>(){}.getType());
+                mahasiswaModelList = g.fromJson(new String(responseBody), new TypeToken<List<MahasiswaModel>>() {
+                }.getType());
 
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(MainActivity.this);
                 _recyclerView1.setLayoutManager(lm);
 
-                MahasiswaAdapter ma = new MahasiswaAdapter(mahasiswaModelList);
+                ma = new MahasiswaAdapter(mahasiswaModelList);
                 _recyclerView1.setAdapter(ma);
 
                 String mahasiswaCount = "Total Mahasiswa : " + ma.getItemCount();
@@ -80,5 +133,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void initRefreshButton() {
+        _refreshButton = findViewById(R.id.refreshButton);
+        _refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadRecyclerView();
+            }
+        });
+    }
 
 }

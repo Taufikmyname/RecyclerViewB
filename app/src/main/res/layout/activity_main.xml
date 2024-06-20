@@ -9,6 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@color/cardview_dark_background">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:id="@+id/txtSearch"
+                android:textColorHint="@color/cardview_light_background"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -39,4 +53,14 @@
         android:backgroundTint="#444444"
         android:id="@+id/addButton"
         android:contentDescription="Record Baru"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="20dp"
+        android:src="@android:drawable/ic_popup_sync"
+        android:backgroundTint="#444444"
+        android:id="@+id/refreshButton"
+        android:contentDescription="Refresh Button"/>
 </FrameLayout>
